@@ -27,6 +27,13 @@ const Page = ({ location }: Props) => {
     const { loading, data, error: gqlError } = useQuery(query, options);
 
     if (loading) {
+        const Loader = get(pageBuilder, "defaults.pages.loader");
+        invariant(Loader, NO_ERROR_PAGE_DEFAULT);
+        console.log("Trying to get loader page");
+        if (Loader) {
+            console.log("Loader page found");
+            return <Loader />;
+        }
         return <CircularProgress />;
     }
 
